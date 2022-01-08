@@ -4,5 +4,11 @@
     <h1 align="center">
         {{court['name']}}
     </h1>
-
+    <script src="jquery.js"></script>
+    <script>
+    $(function(){
+        $("#includedContent").load("map.html");
+    });
+    </script>
+    <div id="includedContent"></div>
 {% endblock %}
