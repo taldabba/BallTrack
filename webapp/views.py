@@ -55,7 +55,7 @@ def see_court():
         else:
             court = courts.find_one({'name':courtName})
             return render_template("courtView.html",user=current_user, court=court)
-
+    # elif request.method == 'POST':
 
 
     else:
