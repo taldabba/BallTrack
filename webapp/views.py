@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from dns.rdatatype import CNAME
+from flask import Blueprint, render_template, request, flash, jsonify, redirect
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -40,12 +41,22 @@ def delete_note():
 @views.route('/show-courts')
 @login_required
 def show_courts():
-
-
     return render_template("courts.html",user=current_user, courts=courts.find())
 
 @views.route('/courts/',methods = ['GET'])
+@login_required
 def see_court():
     if request.method == 'GET':
         courtName = request.args.get('name')
-        render_template("courtView.html")
+        
+
+        if courts.find({'name':courtName}).count() == 0:
+            return redirect("/show-courts", code=302)
+        else:
+            court = courts.find_one({'name':courtName})
+            return render_template("courtView.html",user=current_user, court=court)
+
+
+
+    else:
+         return redirect("/show-courts", code=302)
