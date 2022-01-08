@@ -8,26 +8,31 @@ function initMap() {
             mapId: '6a6625a538e03514',
             disableDefaultUI: true
         });
-    
-    const parkIcon = "../images/balltrack_mapmarker.png";
 
-    const icons = { 
-        park: {
-            icon: parkIcon
-        }
-    };
+    const markerIcon = "https://raw.githubusercontent.com/taldabba/BallTrack/main/webapp/static/images/balltrack_mapmarker_icon.png?token=GHSAT0AAAAAABP7MOK3VLOFKPSQGJP7H2FOYOZZUNA";
+   
+    const markers = [
+        [
+            "Park 1",
+            43.21996064206081, 
+            -79.97880345765851
+        ],
+        [
+            "Park 2",
+            43.21226910984359, 
+            -79.91965472788796
+        ]
+    ];
 
-    const features = [
-        {
-            position: new google.maps.LatLng(43.22001133661375, -79.94849177318447),
-            type: "park"
-        }];
+    for(let i=0; i<markers.length; i++) {
+        const currentMarker = markers[i];
 
-    for (let i = 0; i < features.length; i++) {
         const marker = new google.maps.Marker({
-            position: features[i].position,
-            icon: icons[features[i].type].icon,
-            map: map
+            map: map,
+            // title: markers[0],
+            animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(currentMarker[1], currentMarker[2]),
+            icon: markerIcon
         });
     }
 }
