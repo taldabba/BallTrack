@@ -9,7 +9,7 @@ function initMap() {
             disableDefaultUI: true
         });
     
-    const markerIcon = "https://raw.githubusercontent.com/taldabba/BallTrack/main/webapp/static/images/balltrack_mapmarker_icon.png?token=GHSAT0AAAAAABP7MOK23VR7XVF7SJME74EEYOZ2U6Q";
+    const markerIcon = "https://cdn.discordapp.com/attachments/696724423733936212/929449261802852453/balltrack_mapmarker_icon.png";
 
     const marker = new google.maps.Marker({
         map: map,

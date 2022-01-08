@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block title %}Courts{% endblock %}
+
+{% block content %}
+
+    <h1 align="center">All Courts</h1>
+
+        <ul class="list-group list-group-flush">
+            {% for court in courts%}            
+            <li class="list-group-item">
+                <h3>{{court['name']}}</h3>
+            </li>
+            {% endfor %}
+        </ul>
+
+    
+{% endblock %}
+

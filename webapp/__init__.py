@@ -2,6 +2,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from pymongo import MongoClient
+
+connectionString = 'mongodb+srv://adamikram:adamikram@expense-handler.i30se.mongodb.net/balltrack?retryWrites=true&w=majority'
+client = MongoClient(connectionString)
+mongoDB = client.balltrack
+courts = mongoDB.courts
 
 db = SQLAlchemy()
 DB_NAME = "database.db"

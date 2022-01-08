@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from .models import Note
 from . import db
 import json
+from . import courts
 
 views = Blueprint('views', __name__)
 
@@ -35,3 +36,10 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+@views.route('/show-courts')
+@login_required
+def show_courts():
+
+
+    return render_template("courts.html",user=current_user, courts=courts.find())
