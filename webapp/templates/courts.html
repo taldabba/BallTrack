@@ -7,7 +7,12 @@
         <ul class="list-group list-group-flush">
             {% for court in courts%}            
             <li class="list-group-item">
-                <h3>{{court['name']}}</h3>
+                <h3>{{court['name']}} 
+                    <!-- <button type="button" class="close">See Court on map</button> -->
+                    <a href="/courts?name={{court['name']}}" type="button", class="close">Show in Map</a>
+                </h3>
+                
+                
             </li>
             {% endfor %}
         </ul>

@@ -43,3 +43,9 @@ def show_courts():
 
 
     return render_template("courts.html",user=current_user, courts=courts.find())
+
+@views.route('/courts/',methods = ['GET'])
+def see_court():
+    if request.method == 'GET':
+        courtName = request.args.get('name')
+        render_template("courtView.html")
