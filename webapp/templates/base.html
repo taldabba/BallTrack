@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -36,7 +38,10 @@
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           <a class="nav-item nav-link" id="show-courts" href="/show-courts">Courts</a>
           <a class="nav-item nav-link" id="show-courts" href="/register-court">Register a Court</a>
+          <a class="nav-item nav-link" id="profile" href="profile">Profiles</a>
+          <center>
           <img id="ballTrackLogo" src="../static/images/balltrack_logo.png" alt="BallTrack Logo">
+          </center>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
@@ -85,6 +90,12 @@
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='index.js') }}"
+      
+     
+  </body>
+  </html>
+  
+
     ></script>
   </body>
 </html>

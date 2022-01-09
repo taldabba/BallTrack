@@ -1,7 +1,7 @@
 from dns.rdatatype import CNAME
 from flask import Blueprint, render_template, request, flash, jsonify, redirect
+from flask.helpers import url_for
 from flask_login import login_required, current_user
-from sqlalchemy.sql.functions import user
 from .models import Note
 from . import db
 import json
@@ -39,12 +39,14 @@ def delete_note():
 
     return jsonify({})
 
-@views.route('/show-courts', methods = ['GET'])
+
+
+@views.route('/show-courts')
 @login_required
 def show_courts():
     return render_template("courts.html",user=current_user, courts=courts.find())
 
-@views.route('/courts/',methods = ['GET','POST'])
+@views.route('/courts/',methods = ['GET'])
 @login_required
 def see_court():
     if request.method == 'GET':
@@ -57,22 +59,8 @@ def see_court():
         else:
             court = courts.find_one({'name':courtName})
             return render_template("courtView.html",user=current_user, court=court)
-    elif request.method == 'POST':       
-        courtName = request.form.get('action')
-        courtName = " ".join(courtName.split("%20"))
-        
-        if not current_user.is_active:
-            current_user.is_active = True
-            current_user.current_court = courtName
-            courts.update_many({"name": courtName}, {"$push":{"players": current_user.id}})
+    # elif request.method == 'POST':
 
-
-        else:
-            current_user.is_active = False
-            current_user.current_court = ''
-        db.session.commit()
-        
-        return redirect(f"/courts/?name={courtName}", code=302)
 
     else:
          return redirect("/show-courts", code=302)
@@ -82,12 +70,3 @@ def see_court():
 def registerCourt():
     return render_template("registerCourt.html", user=current_user)
 
-@views.route('/checkout', methods=['GET'])
-@login_required
-def checkout():
-    if request.method == 'GET':
-        if current_user.is_active:
-            current_user.is_active = False
-            current_user.current_court= ''
-            db.session.commit()
-    return redirect("/show-courts")
