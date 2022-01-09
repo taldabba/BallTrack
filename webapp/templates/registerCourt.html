@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}  
 
 {% block register %}
 
@@ -9,17 +9,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register a Court || BallTrack</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <form action="" method="POST"></form> 
+
+    <script>
+    let map;
+
+    function initMap() {
+        const markerIcon = "https://cdn.discordapp.com/attachments/696724423733936212/929449261802852453/balltrack_mapmarker_icon.png";
+        const myLatlng = {lat: 43.227593065521674, lng: -79.85516783575812};
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 9,
+            center: myLatlng,
+            disableDefaultUI: true,
+            mapId: "6a6625a538e03514"
+        });
+        
+        const marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            icon: markerIcon
+        });
+
+        let infoWindow = new google.maps.InfoWindow({
+            content: "Click the map to select the basketball court you want to register!",
+            position: myLatlng,
+        });
+
+        infoWindow.open(map);
+        map.addListener("click", (mapsMouseEvent) => {
+            infoWindow.close();
+            infoWindow = new google.maps.InfoWindow({
+                position: mapsMouseEvent.latLng,
+            });
+
+            var latLngString = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
+            var latLngStringArray = latLngString.split(" ");
+            var preLatValue = latLngStringArray[3];
+            var preLngValue = latLngStringArray[6];
+            var latValue = parseFloat(preLatValue.slice(0, (preLatValue.length - 2)));
+            var lngValue = parseFloat(preLngValue.slice(0, (preLngValue.length - 1)));
+
+            infoWindow.setContent();
+            $('#inputLat').attr('placeholder', latValue);
+            $('#inputLng').attr('placeholder', lngValue);
+            var newLatLng = new google.maps.LatLng(latValue, lngValue);
+            marker.setPosition(newLatLng);
+
+        });
+
+    }
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="../static/stylesheets/map_stylesheet.css"/>
+    
+    <form action="register-court" method="POST"></form> 
     <div class="registerForm">
         <label for="courtName">Court Name</label>
         <input name="courtName" id="courtName type="text">
         <br>
         <label for="inputLat">Latitude</label>
-        <input type="number" name="inputLat" id="inputLat" disabled>
+        <input type="text" name="inputLat" id="inputLat" disabled>
         <br>
-        <label for="inputLng">Longtitude</label>
+        <label for="inputLng">Longitude</label>
         <input type="number" name="inputLng" id="inputLng" disabled>
         <br>
         <button type="submit" id="submitButton">Submit
@@ -28,7 +83,6 @@
     <script 
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Ig1A4IhrvXKZe7BTiyleDXJCcLMNoLQ&map_ids=6a6625a538e03514&callback=initMap&v=weekly"
         async defer></script>
-
 </body>
 </html>
 
