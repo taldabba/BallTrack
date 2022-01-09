@@ -3,6 +3,17 @@
 {% block content %}
 
     <h1 align="center">All Courts</h1>
+        
+        {% if user.is_active %}
+            <a href="/checkout" >
+                <input align="center" type="button" value="You are currently checked into {{user.current_court}}" />
+            </a>   
+        {% else %}
+            <h3 align="center">You are not currently checked into any court</h3>
+
+        {% endif %}
+    
+
 
         <ul class="list-group list-group-flush">
             {% for court in courts%}            

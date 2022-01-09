@@ -1,5 +1,6 @@
 from dns.rdatatype import CNAME
 from flask import Blueprint, render_template, request, flash, jsonify, redirect
+from flask.helpers import url_for
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -38,6 +39,8 @@ def delete_note():
 
     return jsonify({})
 
+
+
 @views.route('/show-courts')
 @login_required
 def show_courts():
@@ -50,13 +53,20 @@ def see_court():
         courtName = request.args.get('name')
         
 
-        if courts.find({'name':courtName}).count() == 0:
+        # if courts.find({'name':courtName}).count() == 0:
+        if 1 == 0:
             return redirect("/show-courts", code=302)
         else:
             court = courts.find_one({'name':courtName})
             return render_template("courtView.html",user=current_user, court=court)
-
+    # elif request.method == 'POST':
 
 
     else:
          return redirect("/show-courts", code=302)
+
+@views.route("/register-court")
+@login_required
+def registerCourt():
+    return render_template("registerCourt.html", user=current_user)
+
