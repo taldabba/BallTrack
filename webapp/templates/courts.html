@@ -4,6 +4,16 @@
 
     <h1 align="center">All Courts</h1>
         
+        {% if user.is_active %}
+            <a href="/checkout">
+                <input align="center" type="button" value="You are currently on {{user.current_court}}" />
+            </a>   
+        {% else %}
+            <h3 align="center">You are not currently check into any court</h3>
+
+        {% endif %}
+    
+
 
         <ul class="list-group list-group-flush">
             {% for court in courts%}            

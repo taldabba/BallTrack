@@ -61,7 +61,6 @@ def see_court():
         courtName = " ".join(courtName.split("%20"))
         
         if not current_user.is_active:
-
             current_user.is_active = True
             current_user.current_court = courtName
         else:
@@ -70,3 +69,13 @@ def see_court():
         db.session.commit()
         
         return redirect(f"/courts/?name={courtName}", code=302)
+
+@views.route('/checkout', methods=['GET'])
+@login_required
+def checkout():
+    if request.method == 'GET':
+        if current_user.is_active:
+            current_user.is_active = False
+            current_user.current_court= ''
+            db.session.commit()
+    return redirect("/show-courts")
