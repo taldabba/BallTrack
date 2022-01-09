@@ -1,6 +1,7 @@
 from dns.rdatatype import CNAME
 from flask import Blueprint, render_template, request, flash, jsonify, redirect
 from flask_login import login_required, current_user
+from sqlalchemy.sql.functions import user
 from .models import Note
 from . import db
 import json
@@ -38,12 +39,12 @@ def delete_note():
 
     return jsonify({})
 
-@views.route('/show-courts')
+@views.route('/show-courts', methods = ['GET'])
 @login_required
 def show_courts():
     return render_template("courts.html",user=current_user, courts=courts.find())
 
-@views.route('/courts/',methods = ['GET'])
+@views.route('/courts/',methods = ['GET','POST'])
 @login_required
 def see_court():
     if request.method == 'GET':
@@ -55,8 +56,17 @@ def see_court():
         else:
             court = courts.find_one({'name':courtName})
             return render_template("courtView.html",user=current_user, court=court)
-    # elif request.method == 'POST':
+    elif request.method == 'POST':       
+        courtName = request.form.get('action')
+        courtName = " ".join(courtName.split("%20"))
+        
+        if not current_user.is_active:
 
-
-    else:
-         return redirect("/show-courts", code=302)
+            current_user.is_active = True
+            current_user.current_court = courtName
+        else:
+            current_user.is_active = False
+            current_user.current_court = ''
+        db.session.commit()
+        
+        return redirect(f"/courts/?name={courtName}", code=302)

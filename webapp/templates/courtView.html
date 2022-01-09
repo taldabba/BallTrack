@@ -1,9 +1,16 @@
 {% extends "base.html" %} {% block title %}{{court['name']}}{% endblock %} 
 
-{% block content%}   
+{% block content%}  
 <script>
-    
+    function clicked(e)
+    {
+        if(!confirm('Are you sure?')) {
+            e.preventDefault();
+        }
+    }
+</script>
 
+<script>    
     let map;
     function initMap() {
         map = new google.maps.Map(
@@ -54,7 +61,7 @@
 
     </h1>
     
-   
+
     
     
     <body>
@@ -63,6 +70,21 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Ig1A4IhrvXKZe7BTiyleDXJCcLMNoLQ&map_ids=6a6625a538e03514&callback=initMap&v=weekly"
             async defer>
         </script>
+        
+        <br>
+        
+        {% if not user.is_active %}
+            <form method="POST">
+                <button name='action' value={{court['name']| urlencode}}>Check In</button>
+            </form>
+        
+        {% else %}
+            <form method="POST">
+                <button name='action' value={{court['name']| urlencode}}>Check Out</button>
+            </form>
+
+        {% endif %}
+    
     </body>
 
 {% endblock %}
