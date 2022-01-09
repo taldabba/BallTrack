@@ -51,7 +51,8 @@ def see_court():
         courtName = request.args.get('name')
         
 
-        if courts.find({'name':courtName}).count() == 0:
+        # if courts.find({'name':courtName}).count() == 0:
+        if 1 == 0:
             return redirect("/show-courts", code=302)
         else:
             court = courts.find_one({'name':courtName})
@@ -72,6 +73,14 @@ def see_court():
         db.session.commit()
         
         return redirect(f"/courts/?name={courtName}", code=302)
+
+    else:
+         return redirect("/show-courts", code=302)
+
+@views.route("/register-court")
+@login_required
+def registerCourt():
+    return render_template("registerCourt.html", user=current_user)
 
 @views.route('/checkout', methods=['GET'])
 @login_required
