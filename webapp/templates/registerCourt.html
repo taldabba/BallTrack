@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register a Court || BallTrack</title>
+    <link rel="stylesheet" href="../static/stylesheets/register_stylesheet.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -65,21 +66,33 @@
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="../static/stylesheets/map_stylesheet.css"/>
-    
-    <form action="register-court" method="POST"></form> 
-    <div class="registerForm">
-        <label for="courtName">Court Name</label>
-        <input name="courtName" id="courtName type="text">
-        <br>
-        <label for="inputLat">Latitude</label>
-        <input type="text" name="inputLat" id="inputLat" disabled>
-        <br>
-        <label for="inputLng">Longitude</label>
-        <input type="number" name="inputLng" id="inputLng" disabled>
-        <br>
-        <button type="submit" id="submitButton">Submit
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+
+    <center>
+    <div id="register">  
+        <h1 class="registerHeader">Register a Court</h1> 
+        <div id="map"></div> 
+        <form action="register-court" method="POST"></form> 
+        <div class="registerForm">
+            <div class="textfields">
+            <label for="courtName">Court Name</label>
+            <input name="courtName" id="courtName type="text">
+            <br>
+            <label for="inputLat">Latitude</label>
+            <input type="text" name="inputLat" id="inputLat" disabled>
+            <br>
+            <label for="inputLng">Longitude</label>
+            <input type="number" name="inputLng" id="inputLng" disabled>
+            </div>
+            <br>
+            <div class="submitButton">
+            <button type="submit" id="submitButton">Submit</button>
+            </div>
+        </div>
     </div>
-    <div id="map"></div> 
+    </center>
     <script 
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Ig1A4IhrvXKZe7BTiyleDXJCcLMNoLQ&map_ids=6a6625a538e03514&callback=initMap&v=weekly"
         async defer></script>

@@ -1,0 +1,41 @@
+#map {
+    height: 50%;
+    width: 50%;
+}
+
+.registerHeader {
+    font-family: 'Lato', Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-size: 36px;
+}
+
+#register {
+    display: inline-block;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 65px;
+    margin-bottom: auto;
+}
+
+.registerForm {
+    font-family: 'Lato', Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submitButton {
+    display: inline-block;
+    margin: 0 auto;
+    height: fit-content;
+    width: fit-content;
+}
+
+.textfields {
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+}

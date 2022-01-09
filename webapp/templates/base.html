@@ -17,7 +17,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../static/stylesheets/base_stylesheet.css">
-    <script src="jquery.js"></script>
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
@@ -34,14 +33,12 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
           {% if user.is_authenticated %}
+          <img id="ballTrackLogo" src="../static/images/balltrack_logo.png" alt="BallTrack Logo">
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           <a class="nav-item nav-link" id="show-courts" href="/show-courts">Courts</a>
           <a class="nav-item nav-link" id="show-courts" href="/register-court">Register a Court</a>
           <a class="nav-item nav-link" id="profile" href="profile">Profiles</a>
-          <center>
-          <img id="ballTrackLogo" src="../static/images/balltrack_logo.png" alt="BallTrack Logo">
-          </center>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
