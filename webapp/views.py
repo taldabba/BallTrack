@@ -63,6 +63,9 @@ def see_court():
         if not current_user.is_active:
             current_user.is_active = True
             current_user.current_court = courtName
+            courts.update_many({"name": courtName}, {"$push":{"players": current_user.id}})
+
+
         else:
             current_user.is_active = False
             current_user.current_court = ''
