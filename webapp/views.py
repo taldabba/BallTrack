@@ -1,5 +1,6 @@
 from dns.rdatatype import CNAME
 from flask import Blueprint, render_template, request, flash, jsonify, redirect
+from flask.helpers import url_for
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -38,6 +39,8 @@ def delete_note():
 
     return jsonify({})
 
+
+
 @views.route('/show-courts')
 @login_required
 def show_courts():
@@ -66,3 +69,4 @@ def see_court():
 @login_required
 def registerCourt():
     return render_template("registerCourt.html", user=current_user)
+

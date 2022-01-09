@@ -10,9 +10,17 @@ class Note(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
+    image_file = db.Column(db.String(150), nullable=False, default='d.jpg')
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
+
+
+    

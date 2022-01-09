@@ -28,6 +28,12 @@ def login():
     return render_template("login.html", user=current_user)
 
 
+@auth.route('/profile')
+@login_required
+def profile():
+    image_file = url_for('static', filename='profile_pics/' f"current_user.image_file" )
+    return render_template('profile.html',user=current_user, image_file=image_file)
+
 @auth.route('/logout')
 @login_required
 def logout():
